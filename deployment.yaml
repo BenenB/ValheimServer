@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: valheim-server
+  labels:
+    app: valheim-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: valheim-server
+  template:
+    metadata:
+      labels:
+        app: valheim-server
+    spec:
+      containers:
+      - name: valheim-server
+        image: lloesche/valheim-server:sha-951992b
+        ports:
+        - name: game
+          containerPort: 2456
+          protocol: UDP
+        - name: query
+          containerPort: 2457
+          protocol: UDP
+        env:
+        - name: SERVER_NAME
+          value: "Valheim Server"
+        - name: WORLD_NAME
+          value: "Dedicated"
+        - name: SERVER_PASS
+          valueFrom:
+            secretKeyRef:
+              name: valheim-server-secret
+              key: server-password
+              optional: true
+        volumeMounts:
+        - name: valheim-data
+          mountPath: /config
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "2000m"
+      volumes:
+      - name: valheim-data
+        persistentVolumeClaim:
+          claimName: valheim-server-pvc
+
