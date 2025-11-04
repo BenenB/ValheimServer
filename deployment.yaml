@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: valheim-server
-        image: benenb/valheim-server:2d5446bc3b29
+        image: benenb/valheim-server:2def49771700
         ports:
         - name: game
           containerPort: 2456
