@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: valheim-server
-        image: lloesche/valheim-server:sha-951992b
+        image: benenb/valheim-server:latest
         ports:
         - name: game
           containerPort: 2456
