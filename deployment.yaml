@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: valheim-server
-        image: benenb/valheim-server:2def49771700
+        image: benenb/valheim-box64:v1
         ports:
         - name: game
           containerPort: 2456
@@ -25,11 +25,15 @@ spec:
           containerPort: 2457
           protocol: UDP
         env:
-        - name: SERVER_NAME
-          value: "Valheim Server"
-        - name: WORLD_NAME
-          value: "Dedicated"
-        - name: SERVER_PASS
+        - name: VALHEIM_SERVER_NAME
+          value: "Benji's Server"
+        - name: VALHEIM_WORLD_NAME
+          value: "ValheimBox64"
+        - name: VALHEIM_ISPUBLIC
+          value: "true"
+        - name: VALHEIM_CROSSPLAY
+          value: "true"
+        - name: VALHEIM_PASSWORD
           valueFrom:
             secretKeyRef:
               name: valheim-server-secret
