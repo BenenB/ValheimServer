@@ -9,3 +9,4 @@ data:
   WORLD_NAME: "ValheimBox64"
   ISPUBLIC: "true"
   CROSSPLAY: "true"
+  DEBUG: "true"
