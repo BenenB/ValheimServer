@@ -35,8 +35,10 @@ spec:
         - configMapRef:
             name: valheim-server-config
         volumeMounts:
-        - name: valheim-data
-          mountPath: /config
+        - name: server-data
+          mountPath: /root/.config/unity3d/IronGate/Valheim/
+        - name: server-files
+          mountPath: /root/server_files
         resources:
           requests:
             memory: "512Mi"
