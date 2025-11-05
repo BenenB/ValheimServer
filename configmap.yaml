@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: valheim-server-config
+  labels:
+    app: valheim-server
+data:
+  SERVER_NAME: "Benji's Server"
+  WORLD_NAME: "ValheimBox64"
+  ISPUBLIC: "true"
+  CROSSPLAY: "true"

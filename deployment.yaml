@@ -25,20 +25,15 @@ spec:
           containerPort: 2457
           protocol: UDP
         env:
-        - name: VALHEIM_SERVER_NAME
-          value: "Benji's Server"
-        - name: VALHEIM_WORLD_NAME
-          value: "ValheimBox64"
-        - name: VALHEIM_ISPUBLIC
-          value: "true"
-        - name: VALHEIM_CROSSPLAY
-          value: "true"
         - name: VALHEIM_PASSWORD
           valueFrom:
             secretKeyRef:
               name: valheim-server-secret
               key: server-password
               optional: true
+        envFrom:
+        - configMapRef:
+            name: valheim-server-config
         volumeMounts:
         - name: valheim-data
           mountPath: /config
@@ -50,7 +45,10 @@ spec:
             memory: "2Gi"
             cpu: "2000m"
       volumes:
-      - name: valheim-data
+      - name: server-data
         persistentVolumeClaim:
-          claimName: valheim-server-pvc
+          claimName: valheim-server-data
+      - name: server-files
+        persistentVolumeClaim:
+          claimName: valheim-server-files
 
